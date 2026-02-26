@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>HMN | @yield('title')</title>
+    <title>UPT BLP2TK | @yield('title')</title>
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -14,7 +14,7 @@
         content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard">
     <meta name="author" content="codedthemes">
     <!-- [Favicon] icon -->
-    <link rel="icon" href="{{ asset('asset/img/apple-touch-icon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('asset/img/logo-upt.png') }}" type="image/x-icon">
     <!-- map-vector css -->
     <link rel="stylesheet" href="../assets/css/plugins/jsvectormap.min.css">
     <!-- [Google Font : Poppins] icon -->
@@ -67,8 +67,8 @@
             <div class="m-header">
                 <a href="../dashboard/index.html" class="b-brand text-primary">
                     <!-- ========   Change your logo from here   ============ -->
-                    <img src="{{ asset('/asset/img/logohmn.png') }}" width="150" height="60"
-                        alt="PT Haga Mendhena Nusantara">
+                    <img src="{{ asset('/asset/img/logo-upt.png') }}" width="150" height="60"
+                        alt="UPT BLP2TK Surabaya" onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend','<span style=\'font-weight:700;font-size:12px;color:#0d6efd;\'>UPT BLP2TK</span>')">
                 </a>
             </div>
             <div class="navbar-content">
@@ -80,13 +80,38 @@
                     <li class="pc-item pc-caption">
                         <i class="ph ph-suitcase"></i>
                     </li>
+                    {{-- Profil UPT --}}
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link"><span class="pc-micon">
-                                <i class="ph ph-tree-structure"></i> </span><span class="pc-mtext">Konten</span><span
+                                <i class="ph ph-buildings"></i></span><span class="pc-mtext">Profil UPT</span><span
                                 class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
-                            <li class="pc-item"><a class="pc-link" href="{{ route('blog.index') }}">Blog</a>
-                            </li>
+                            <li class="pc-item"><a class="pc-link" href="{{ route('admin.profil-upt.index') }}">Profil &amp; Visi Misi</a></li>
+                            <li class="pc-item"><a class="pc-link" href="{{ route('admin.pegawai.index') }}">Pegawai</a></li>
+                        </ul>
+                    </li>
+                    {{-- Program Kegiatan --}}
+                    <li class="pc-item">
+                        <a href="{{ route('admin.program-kegiatan.index') }}" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-calendar-check"></i></span><span class="pc-mtext">Program Kegiatan</span></a>
+                    </li>
+                    {{-- Kalkulator Produktivitas --}}
+                    <li class="pc-item">
+                        <a href="{{ route('admin.kalkulator.index') }}" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-calculator"></i></span><span class="pc-mtext">Kalkulator Produktivitas</span></a>
+                    </li>
+                    {{-- Berita --}}
+                    <li class="pc-item">
+                        <a href="{{ route('admin.berita.index') }}" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-newspaper"></i></span><span class="pc-mtext">Berita</span></a>
+                    </li>
+                    {{-- Blog --}}
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link"><span class="pc-micon">
+                                <i class="ph ph-tree-structure"></i> </span><span class="pc-mtext">Blog</span><span
+                                class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item"><a class="pc-link" href="{{ route('blog.index') }}">Semua Blog</a></li>
                         </ul>
                     </li>
                     {{-- <li class="pc-item pc-hasmenu">
@@ -110,10 +135,10 @@
     <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
     <header class="pc-header">
         <div class="m-header">
-            <a href="../dashboard/index.html" class="b-brand text-primary">
+            <a href="{{ route('dashboard') }}" class="b-brand text-primary">
                 <!-- ========   Change your logo from here   ============ -->
-                <img src="{{ asset('/asset/img/logohmn.png') }}" width="150" height="60"
-                    alt="PT Haga Mendhena Nusantara">
+                <img src="{{ asset('/asset/img/logo-upt.png') }}" width="150" height="60"
+                    alt="UPT BLP2TK Surabaya" onerror="this.style.display='none'">
             </a>
         </div>
         <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
@@ -178,7 +203,7 @@
         <div class="footer-wrapper container-fluid">
             <div class="row">
                 <div class="col-sm-6 my-1">
-                    <p class="m-0">Gradient Able &#9829; crafted by HAGA MENDHENA NUSANTARA </p>
+                    <p class="m-0">UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja Surabaya &copy; 2026</p>
                 </div>
                 <div class="col-sm-6 ms-auto my-1">
                     <ul class="list-inline footer-link mb-0 justify-content-sm-end d-flex">

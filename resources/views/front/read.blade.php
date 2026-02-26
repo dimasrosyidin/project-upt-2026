@@ -1,5 +1,5 @@
 @extends('partials.front')
-@section('title', 'Read Article')
+@section('title', 'Baca Berita | UPT BLP2TK Surabaya')
 @section('content')
     <main id="main">
 
