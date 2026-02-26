@@ -1,15 +1,17 @@
 @extends('partials.front')
 @section('title', 'UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja Surabaya')
 @section('content')
+
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="hero d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center">
                     <h1 data-aos="fade-up">
-                        Temukan solusi terbaik untuk kebutuhan teknologi sistem informasi Anda bersama kami 🤓 </h1>
+                        UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja Surabaya
+                    </h1>
                     <h2 data-aos="fade-up" data-aos-delay="400">
-                        <i>Kami ada untuk teknologi sistem informasi yang anda butuhkan</i>
+                        <i>Meningkatkan produktivitas dan kompetensi tenaga kerja menuju Indonesia yang lebih maju</i>
                     </h2>
                     <div data-aos="fade-up" data-aos-delay="600">
                         <div class="text-center text-lg-start">
@@ -22,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="{{ asset('asset/img/hero-img.png') }}" class="img-fluid" alt="PT Haga Mendhena Nusantara" />
+                    <img src="{{ asset('asset/img/hero-img.png') }}" class="img-fluid" alt="UPT BLP2TK Surabaya" />
                 </div>
             </div>
         </div>
@@ -30,492 +32,403 @@
     <!-- End Hero -->
 
     <main id="main">
+
         <!-- ======= About Section ======= -->
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
-                <div class="row gx-0">
-                    <div class="justify-content-center:center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="content">
-                            <h2>
-                                Tentang Kami 👨👨‍🦱👨
-                            </h2>
-                            <p>
-                                <b>Haga Mendhena Nusantara</b> didirikan pada 1 Mei 2024
-                                oleh tiga orang mahasiswa lulusan Ilmu Komputer dari Universitas Methodist Indonesia.
-                                Perusahaan kami fokus pada teknologi sistem informasi berbasis web yang profesional
-                                dengan harga terjangkau.
-                                Kami memiliki pengalaman lebih dalam merancang, mengembangkan, dan menyediakan
-                                situs web dan melayani pelanggan yang baik. kami bekerja dengan penuh tanggung jawab
-                                untuk membuat proyek ini sukses.
-                            </p>
-                            <div class="text-center text-lg-start">
-
-                            </div>
-                        </div>
+                <div class="content">
+                    <h2>Tentang UPT BLP2TK</h2>
+                    <p>
+                        <b>UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja (BLP2TK) Surabaya</b>
+                        adalah unit pelaksana teknis di bawah Dinas Tenaga Kerja yang bertugas memberikan
+                        pelatihan, bimbingan, dan pengembangan produktivitas kepada tenaga kerja di wilayah
+                        Surabaya dan sekitarnya. Kami berkomitmen untuk meningkatkan kualitas dan kompetensi
+                        sumber daya manusia agar mampu bersaing di pasar tenaga kerja nasional maupun global.
+                    </p>
+                    <div class="text-center text-lg-start">
+                        <a href="{{ route('profil-upt') }}"
+                            class="btn-get-started d-inline-flex align-items-center justify-content-center align-self-center">
+                            <span>Profil Kami</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
-
-
                 </div>
             </div>
         </section>
+        <!-- End About Section -->
 
+        <!-- ======= Berita Terbaru ======= -->
+        @php
+            $beritaTerbaru = \App\Models\Berita::latest()->take(5)->get();
+            $slideColors = [
+                'linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1565c0 100%)',
+                'linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #388e3c 100%)',
+                'linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7b1fa2 100%)',
+                'linear-gradient(135deg, #b71c1c 0%, #c62828 50%, #d32f2f 100%)',
+                'linear-gradient(135deg, #e65100 0%, #ef6c00 50%, #f57c00 100%)',
+            ];
+            $slideIcons = ['bi-award-fill', 'bi-people-fill', 'bi-gear-fill', 'bi-building', 'bi-journal-richtext'];
+        @endphp
 
-        <!-- ======= Features Section ======= -->
-        <section id="features" class="features">
+        <section class="py-5" style="background: #f0f4ff;">
             <div class="container" data-aos="fade-up">
                 <header class="section-header">
-
-                    <p>Keunggulan Layanan Kami 🥶</p>
+                    <p>Berita Terbaru</p>
                 </header>
 
+                @if($beritaTerbaru->count() > 0)
 
+                <!-- Slider Wrapper -->
+                <div class="bs-wrapper" id="beritaSliderWrapper">
 
-                <div class="section-header">
-                    <div class="row align-self-center gy-4">
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Profesionalisme Tinggi</h3>
+                    <div class="bs-track" id="beritaTrack">
+                        @foreach($beritaTerbaru as $i => $berita)
+                        <div class="bs-slide" data-index="{{ $i }}">
+
+                            {{-- Kiri: Gambar atau Placeholder Warna --}}
+                            <div class="bs-img-col">
+                                @if($berita->foto && file_exists(public_path('images/berita/' . $berita->foto)))
+                                    <img src="{{ asset('images/berita/' . $berita->foto) }}"
+                                         alt="{{ $berita->judul }}"
+                                         class="bs-img">
+                                @else
+                                    <div class="bs-img-placeholder" style="background: {{ $slideColors[$i % 5] }}">
+                                        <i class="bi {{ $slideIcons[$i % 5] }} bs-placeholder-icon"></i>
+                                        <span class="bs-placeholder-label">UPT BLP2TK Surabaya</span>
+                                    </div>
+                                @endif
                             </div>
-                        </div>
 
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Komitmen pada Kedisiplinan</h3>
+                            {{-- Kanan: Konten Berita --}}
+                            <div class="bs-content-col">
+                                <div class="bs-tag">
+                                    <i class="bi bi-newspaper me-1"></i> Berita
+                                </div>
+                                <div class="bs-date">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    {{ $berita->created_at->format('d F Y') }}
+                                </div>
+                                <h3 class="bs-title">{{ $berita->judul }}</h3>
+                                <p class="bs-excerpt">
+                                    {{ Str::limit(strip_tags($berita->narasi), 200, '...') }}
+                                </p>
+                                <a href="{{ route('show-blog') }}" class="bs-readmore">
+                                    Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
                             </div>
+
                         </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Inovasi Berkelanjutan</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Pelayanan Pelanggan Terbaik</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Kemitraan yang Berkelanjutan</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Kualitas dan Ketepatan</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Transparansi dan Komunikasi</h3>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
-                            <div class="feature-box d-flex align-items-center">
-                                <i class="bi bi-check"></i>
-                                <h3>Fleksibilitas dan Adaptabilitas</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- / row -->
-
-
-
-            </div>
-        </section>
-        <!-- End Features Section -->
-
-        <!-- ======= Services Section ======= -->
-        <section id="services" class="services">
-            <div class="container" data-aos="fade-up">
-                <header class="section-header">
-                    <p>Layanan Kami 🥰🤗 </p>
-                </header>
-
-                <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-box blue">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIM-RS</h3>
-                            <p>
-                                SIM RS (Sistem Informasi Manajemen Rumah Sakit)
-                                adalah sistem komputer yang digunakan untuk mengelola berbagai
-                                aspek operasional rumah sakit, termasuk manajemen pasien, rekam medis elektronik,
-                                administrasi, dan manajemen stok. Tujuannya adalah meningkatkan efisiensi, koordinasi,
-                                dan pelayanan kesehatan dalam rumah sakit dengan memanfaatkan teknologi informasi..
-                            </p>
-                        </div>
+                        @endforeach
                     </div>
 
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                        <div class="service-box orange">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIM-PUS</h3>
-                            <p>
-                                SIMPUS (Sistem Informasi Manajemen Puskesmas)
-                                adalah sistem komputer yang digunakan untuk mengelola operasional Puskesmas.
-                                Tujuannya adalah meningkatkan efisiensi pelayanan kesehatan dengan otomatisasi
-                                administrasi,
-                                pencatatan data pasien, manajemen stok obat, dan pelaporan keuangan serta statistik.
-                                SIMPUS membantu Puskesmas menyediakan layanan kesehatan yang lebih efektif dan akurat
-                                kepada masyarakat.
-                            </p>
-                        </div>
+                    {{-- Navigasi --}}
+                    <button class="bs-nav bs-prev" onclick="bsSlide(-1)" aria-label="Sebelumnya">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="bs-nav bs-next" onclick="bsSlide(1)" aria-label="Berikutnya">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+
+                    {{-- Dots --}}
+                    <div class="bs-dots">
+                        @foreach($beritaTerbaru as $i => $berita)
+                            <button class="bs-dot {{ $i === 0 ? 'active' : '' }}"
+                                    onclick="bsGoTo({{ $i }})"
+                                    aria-label="Slide {{ $i+1 }}"></button>
+                        @endforeach
                     </div>
 
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-box green">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIM-Klinik</h3>
-                            <p>
-                                SIM Klinik adalah sistem informasi manajemen komputer
-                                yang digunakan untuk mengelola operasional klinik atau praktik medis.
-                                Tujuannya adalah meningkatkan efisiensi layanan melalui otomatisasi administrasi,
-                                pencatatan data pasien, manajemen jadwal dokter, pembayaran, dan pelaporan keuangan.
-                                SIM Klinik membantu meningkatkan produktivitas klinik dan memperbaiki pengalaman pasien.
-                            </p>
-
-                        </div>
+                    {{-- Counter --}}
+                    <div class="bs-counter">
+                        <span id="bsCurrent">1</span> / {{ $beritaTerbaru->count() }}
                     </div>
 
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                        <div class="service-box zaitun">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIMPEG</h3>
-                            <p>
-                                SIMPEG adalah singkatan dari Sistem Informasi Kepegawaian.
-                                Ini adalah sistem yang digunakan oleh instansi pemerintah untuk mengelola
-                                data kepegawaian secara terkomputerisasi. SIMPEG mencakup informasi-informasi
-                                seperti data personal karyawan, riwayat jabatan, kenaikan pangkat, penggajian,
-                                dan aspek administrasi lainnya yang berkaitan dengan pegawai.
-                                Sistem ini membantu memudahkan proses pengelolaan sumber daya manusia (SDM)
-                                dalam sebuah organisasi atau instansi pemerintah.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                        <div class="service-box red">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>E-Commerce</h3>
-                            <p>
-                                Sistem informasi e-commerce adalah infrastruktur teknologi yang mendukung
-                                operasi penjualan online. Ini mencakup platform e-commerce, manajemen konten,
-                                transaksi elektronik, basis data produk dan pelanggan, analisis data,
-                                integrasi dengan sistem eksternal, dan keamanan informasi.
-                                Tujuannya adalah untuk memfasilitasi pembelian online yang aman, efisien,
-                                dan memberikan pengalaman pelanggan yang baik.
-                            </p>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                        <div class="service-box purple">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIMAK</h3>
-                            <p>
-                                SIMAK (Sistem Informasi Manajemen Akademik)
-                                adalah sistem informasi yang digunakan di perguruan tinggi
-                                atau institusi pendidikan untuk mengelola administrasi dan data akademik.
-                                Fungsi utamanya meliputi pendaftaran mahasiswa, manajemen jadwal kuliah,
-                                pencatatan nilai dan absensi, informasi dosen, dan pelaporan akademik.
-                                SIMAK membantu meningkatkan efisiensi dan akurasi pengelolaan data di lingkungan
-                                pendidikan.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                        <div class="service-box kenari">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIM-P</h3>
-                            <p>
-                                Sistem Informasi Manajemen Perpustakaan (Library Management Information System)
-                                adalah aplikasi berbasis komputer yang dirancang khusus untuk mengelola b
-                                erbagai operasi dan aktivitas yang terkait dengan pengelolaan perpustakaan.
-                                Sistem ini bertujuan untuk memudahkan pengelolaan koleksi buku, peminjaman,
-                                pencarian informasi, dan layanan lainnya dalam suatu perpustakaan.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                        <div class="service-box cotu">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>SIM-PERGUD</h3>
-                            <p>
-                                Sistem Informasi Manajemen Pergudangan (Warehouse Management System atau WMS)
-                                adalah sebuah sistem yang dirancang untuk mengelola operasi sehari-hari di
-                                dalam gudang atau pusat distribusi. Tujuan utama dari WMS adalah untuk
-                                mengoptimalkan penyimpanan, pengambilan (picking), dan pengiriman barang
-                                dengan efisien dan akurat.
-                            </p>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                        <div class="service-box pink">
-                            <i class="ri-discuss-line icon"></i>
-                            <h3>Company Profile</h3>
-                            <p>
-                                Sistem Informasi Company Profile adalah sebuah sistem yang digunakan
-                                untuk mengelola dan menyajikan informasi terkait profil perusahaan secara digital.
-                                Tujuannya adalah untuk memberikan gambaran lengkap tentang sejarah, visi, misi, produk
-                                atau layanan, struktur organisasi, dan proyek perusahaan kepada pihak eksternal seperti
-                                calon klien,
-                                mitra bisnis, investor, atau masyarakat umum. Sistem ini membantu perusahaan dalam
-                                mempublikasikan
-                                informasi dengan efektif dan meningkatkan citra perusahaan di mata publik.
-                            </p>
-                        </div>
+                    {{-- Progress bar --}}
+                    <div class="bs-progress-bar">
+                        <div class="bs-progress-fill" id="bsProgress"></div>
                     </div>
 
                 </div>
-            </div>
-        </section>
-        <!-- End Services Section -->
 
-
-
-        <!-- ======= F.A.Q Section ======= -->
-        <section id="faq" class="faq">
-            <div class="container" data-aos="fade-up">
-                <header class="section-header">
-
-                    <p>Pertanyaan yang Sering Diajukan 😵</p>
-                </header>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- F.A.Q List 1-->
-                        <div class="accordion accordion-flush" id="faqlist1">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq-content-1">
-                                        Apa itu sistem informasi berbasis web?
-                                    </button>
-                                </h2>
-                                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                                    <div class="accordion-body">
-                                        Sistem informasi berbasis web adalah aplikasi yang diakses melalui web browser
-                                        yang memungkinkan pengguna untuk mengelola data, berinteraksi, dan melakukan
-                                        berbagai tugas secara online.
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq-content-2">
-                                        Bagaimana cara menggunakan sistem informasi berbasis web ini?
-                                    </button>
-                                </h2>
-                                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                                    <div class="accordion-body">
-                                        Untuk menggunakan sistem ini, Anda perlu mengunjungi URL yang telah disediakan
-                                        dan masuk menggunakan kredensial yang diberikan oleh administrator.
-                                        Setelah masuk, Anda dapat menjelajahi menu dan fitur yang tersedia untuk
-                                        mengakses informasi dan melakukan tugas yang diperlukan.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq-content-3">
-                                        Apa keunggulan menggunakan sistem informasi berbasis
-                                        web daripada yang tidak berbasis web?
-                                    </button>
-                                </h2>
-                                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
-                                    <div class="accordion-body">
-                                        Sistem informasi berbasis web memungkinkan akses dari mana saja dan kapan saja
-                                        melalui internet.
-                                        Hal ini memberikan fleksibilitas, aksesibilitas, dan kemudahan dalam berbagi
-                                        informasi
-                                        dengan pengguna lainnya.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <!-- F.A.Q List 2-->
-                        <div class="accordion accordion-flush" id="faqlist2">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq2-content-1">
-                                        Apakah sistem ini aman untuk digunakan?
-                                    </button>
-                                </h2>
-                                <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                                    <div class="accordion-body">
-                                        Ya, sistem ini dilengkapi dengan langkah-langkah keamanan seperti enkripsi data,
-                                        akses terbatas berdasarkan peran pengguna, dan pemantauan keamanan secara
-                                        terus-menerus
-                                        untuk melindungi informasi pengguna.
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq2-content-2">
-                                        Apakah sistem ini dapat diakses dari perangkat seluler (smartphone atau tablet)?
-                                    </button>
-                                </h2>
-                                <div id="faq2-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                                    <div class="accordion-body">
-                                        Ya, sistem ini dapat diakses melalui perangkat seluler dengan
-                                        menggunakan browser web yang kompatibel. Pastikan untuk memperbarui
-                                        aplikasi browser dan mengakses URL yang sesuai.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#faq2-content-3">
-                                        Apakah sistem ini memerlukan pelatihan khusus sebelum penggunaan?
-                                    </button>
-                                </h2>
-                                <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
-                                    <div class="accordion-body">
-                                        Sistem ini dirancang untuk mudah digunakan,
-                                        namun pelatihan singkat atau panduan pengguna dapat disediakan jika diperlukan.
-                                        Hubungi tim dukungan untuk informasi lebih lanjut.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mt-4">
+                    <a href="{{ route('show-blog') }}" class="btn btn-primary px-5 py-2 rounded-pill">
+                        <i class="bi bi-collection me-2"></i>Lihat Semua Berita
+                    </a>
                 </div>
-            </div>
-        </section>
-        <!-- End F.A.Q Section -->
 
-        <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
-            <div class="container" data-aos="fade-up">
-                <header class="section-header">
-                    <p>Portfolio Kami 😎</p>
-                    <br>
-                    <br> <br>
-
-                    <div class="portfolio">
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/sim rs-project.png') }}"
-                                alt="Project 1 PT Haga Mendhena Nusantara" />
-                            <p>SIM-RS</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/simpus.png') }}"
-                                alt="Project 2 PT Haga Mendhena Nusantara" />
-                            <p>SIMPUS</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/klinik.png') }}"
-                                alt="Project 3 PT Haga Mendhena Nusantara" />
-                            <p>SIM-KLINIK</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/e commerce.png') }}"
-                                alt="Project 3 PT Haga Mendhena Nusantara" />
-                            <p>E-Commerce</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/simak.png') }}"
-                                alt="Project 3 PT Haga Mendhena Nusantara" />
-                            <p>SIMAK</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <div class="portfolio-item">
-                            <img src="{{ asset('asset/img/portfolio/personal-project.jpg') }}"
-                                alt="Project 3 PT Haga Mendhena Nusantara" />
-                            <p>Company Profile</p>
-                            <a href="#">Selengkapnya...</a>
-                        </div>
-                        <!-- Add more portfolio items as needed -->
-                    </div>
-
-            </div>
-        </section>
-       
-        <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
-            <div class="container" data-aos="fade-up">
-                <header class="section-header">
-                    <p>Kontak Kami</p>
-                </header>
-                <div class="row gy-4">
-                    <div class="col-lg-6">
-                        <div class="row gy-4">
-                            <div class="col-md-6">
-                                <div class="info-box">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h3>Alamat</h3>
-                                    <p>Jl. Bendul Merisi No.2, Jagir, Kec. Wonokromo, Surabaya, Jawa Timur 60244</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box">
-                                    <i class="bi bi-telephone"></i>
-                                    <h3>Hubungi Kami</h3>
-                                    <p>0812 1828 1002<br />0823 7055 2029<br />0823 6407 8911</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box">
-                                    <i class="bi bi-envelope"></i>
-                                    <h3>Email</h3>
-                                    <p>hagamendhenanusantara@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="info-box">
-                                    <i class="bi bi-clock"></i>
-                                    <h3>Jam Buka</h3>
-                                    <p>Setiap Hari<br />09.00 - 21.00 WIB</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @else
+                <div class="text-center text-muted py-5">
+                    <i class="bi bi-newspaper fs-1 d-block mb-2"></i>
+                    Belum ada berita tersedia.
                 </div>
+                @endif
             </div>
         </section>
-        
-        <!-- End Contact Section -->
+        <!-- End Berita Terbaru -->
+
+        <style>
+        /* ===== BERITA SLIDER ===== */
+        .bs-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.12);
+            background: #fff;
+            margin-bottom: 8px;
+        }
+        .bs-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+        .bs-slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: row;
+            min-height: 440px;
+        }
+        /* Kolom gambar */
+        .bs-img-col {
+            flex: 0 0 48%;
+            max-width: 48%;
+            overflow: hidden;
+        }
+        .bs-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .bs-img-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .bs-placeholder-icon {
+            font-size: 5rem;
+            color: rgba(255,255,255,0.75);
+        }
+        .bs-placeholder-label {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        /* Kolom konten */
+        .bs-content-col {
+            flex: 0 0 52%;
+            max-width: 52%;
+            padding: 48px 48px 56px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+        }
+        .bs-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #e8f0fe;
+            color: #1a73e8;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            width: fit-content;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .bs-date {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 14px;
+        }
+        .bs-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #1a1a2e;
+            line-height: 1.35;
+            margin-bottom: 16px;
+        }
+        .bs-excerpt {
+            font-size: 0.93rem;
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 28px;
+            flex-grow: 1;
+        }
+        .bs-readmore {
+            display: inline-flex;
+            align-items: center;
+            background: #0d6efd;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 11px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.25s;
+            width: fit-content;
+            box-shadow: 0 4px 16px rgba(13,110,253,0.35);
+        }
+        .bs-readmore:hover {
+            background: #0b5ed7;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13,110,253,0.45);
+        }
+        /* Nav buttons */
+        .bs-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            color: #333;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+        }
+        .bs-nav:hover {
+            background: #0d6efd;
+            color: #fff;
+            box-shadow: 0 6px 22px rgba(13,110,253,0.4);
+        }
+        .bs-prev { left: 16px; }
+        .bs-next { right: 16px; }
+        /* Dots */
+        .bs-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 20;
+        }
+        .bs-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            border: 2px solid #bbb;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.3s;
+        }
+        .bs-dot.active {
+            background: #0d6efd;
+            border-color: #0d6efd;
+            transform: scale(1.3);
+        }
+        /* Counter */
+        .bs-counter {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            z-index: 20;
+            letter-spacing: 1px;
+        }
+        /* Progress bar */
+        .bs-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e0e0e0;
+            z-index: 20;
+        }
+        .bs-progress-fill {
+            height: 100%;
+            background: #0d6efd;
+            width: 0%;
+            transition: width 5s linear;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bs-slide { flex-direction: column; min-height: auto; }
+            .bs-img-col, .bs-content-col { flex: 0 0 100%; max-width: 100%; }
+            .bs-img-placeholder { min-height: 220px; }
+            .bs-content-col { padding: 28px 24px 40px; }
+            .bs-title { font-size: 1.1rem; }
+            .bs-excerpt { display: none; }
+        }
+        </style>
+
+        <script>
+        (function () {
+            const track    = document.getElementById('beritaTrack');
+            const dots     = document.querySelectorAll('.bs-dot');
+            const elCurr   = document.getElementById('bsCurrent');
+            const progress = document.getElementById('bsProgress');
+            const total    = dots.length;
+            let current = 0, timer, progTimer;
+
+            function goTo(n) {
+                current = (n + total) % total;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+                if (elCurr) elCurr.textContent = current + 1;
+                startProgress();
+            }
+
+            function startProgress() {
+                if (progress) {
+                    progress.style.transition = 'none';
+                    progress.style.width = '0%';
+                    void progress.offsetWidth; // reflow
+                    progress.style.transition = 'width 5s linear';
+                    progress.style.width = '100%';
+                }
+            }
+
+            function autoPlay() {
+                timer = setInterval(() => goTo(current + 1), 5000);
+            }
+
+            function reset() { clearInterval(timer); autoPlay(); }
+
+            window.bsSlide = function (d) { goTo(current + d); reset(); };
+            window.bsGoTo  = function (n) { goTo(n); reset(); };
+
+            // Swipe
+            const wrap = document.getElementById('beritaSliderWrapper');
+            if (wrap) {
+                let sx = 0;
+                wrap.addEventListener('touchstart', e => { sx = e.touches[0].clientX; });
+                wrap.addEventListener('touchend',   e => {
+                    const dx = sx - e.changedTouches[0].clientX;
+                    if (Math.abs(dx) > 40) bsSlide(dx > 0 ? 1 : -1);
+                });
+            }
+
+            startProgress();
+            autoPlay();
+        })();
+        </script>
+
     </main>
     <!-- End #main -->
+
 @endsection
