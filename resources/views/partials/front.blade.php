@@ -46,17 +46,15 @@
                 flex-shrink:0;
             ">
                 <div style="display:flex; align-items:center; gap:12px;">
-                    <!-- Ikon bulat -->
-                    <div style="
-                        width:40px; height:40px;
-                        background: linear-gradient(135deg,#1a237e,#1976d2);
-                        border-radius:50%;
-                        display:flex; align-items:center; justify-content:center;
+                    <!-- Logo UPT: gunakan file asset/img/upt.png -->
+                    <img src="{{ asset('asset/img/upt.png') }}" alt="UPT Logo" style="
+                        width:100px; height:40px;
+                        object-fit:cover;
+                        border-radius:6px;
+                        display:block;
                         flex-shrink:0;
                         box-shadow: 0 3px 10px rgba(25,118,210,0.35);
                     ">
-                        <i class="bi bi-building-fill" style="color:#fff; font-size:18px;"></i>
-                    </div>
                     <!-- Teks -->
                     <div style="line-height:1.15;">
                         <div style="
