@@ -247,33 +247,16 @@
                 border-right: 1px solid rgba(1,41,112,0.08);
                 flex-shrink:0;
             ">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <!-- Logo Pemprov Jatim SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 72" width="30" height="36"
-                         style="flex-shrink:0;" title="Pemprov Jawa Timur">
-                        <path d="M30 2 L56 12 L56 42 Q56 62 30 70 Q4 62 4 42 L4 12 Z" fill="#cc0000" stroke="rgba(200,0,0,0.3)" stroke-width="1.5"/>
-                        <polygon points="30,14 33,22 41,22 35,27 37,35 30,30 23,35 25,27 19,22 27,22" fill="#FFD700"/>
-                        <rect x="14" y="50" width="32" height="11" rx="2" fill="rgba(255,255,255,0.9)"/>
-                        <text x="30" y="59" text-anchor="middle" font-size="5.2" font-weight="700" fill="#cc0000" font-family="Arial">JAWA TIMUR</text>
-                    </svg>
-                    <!-- Divider -->
-                    <div style="width:1px;height:34px;background:rgba(1,41,112,0.12);"></div>
-                    <!-- Logo Disnakertrans SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 72" width="30" height="36"
-                         style="flex-shrink:0;" title="Disnakertrans Jatim">
-                        <path d="M30 2 L56 12 L56 42 Q56 62 30 70 Q4 62 4 42 L4 12 Z" fill="#0d47a1" stroke="rgba(13,71,161,0.3)" stroke-width="1.5"/>
-                        <circle cx="30" cy="35" r="12" fill="none" stroke="#FFD700" stroke-width="3"/>
-                        <circle cx="30" cy="35" r="5"  fill="#FFD700"/>
-                        <rect x="28" y="17" width="4" height="6" rx="2" fill="#FFD700"/>
-                        <rect x="28" y="47" width="4" height="6" rx="2" fill="#FFD700"/>
-                        <rect x="16" y="33" width="6" height="4" rx="2" fill="#FFD700"/>
-                        <rect x="38" y="33" width="6" height="4" rx="2" fill="#FFD700"/>
-                    </svg>
-                    <!-- Divider -->
-                    <div style="width:1px;height:34px;background:rgba(1,41,112,0.12);"></div>
-                    <!-- Logo UPT -->
-                    <img src="{{ asset('asset/img/logo-upt.png') }}" alt="Logo UPT BLP2TK"
-                         style="height:32px;width:auto;flex-shrink:0;object-fit:contain;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <!-- Logo UPT: gunakan file asset/img/upt.png -->
+                    <img src="{{ asset('asset/img/upt.png') }}" alt="UPT Logo" style="
+                        width:100px; height:40px;
+                        object-fit:cover;
+                        border-radius:6px;
+                        display:block;
+                        flex-shrink:0;
+                        box-shadow: 0 3px 10px rgba(25,118,210,0.35);
+                    ">
                     <!-- Teks -->
                     <div style="display:flex;flex-direction:column;justify-content:center;">
                         <div style="

@@ -2,15 +2,34 @@
 @section('title', 'UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja Surabaya')
 @section('content')
 
-{{-- ============================================================ HERO ============================================================ --}}
-<section id="hero" style="
-    background: linear-gradient(135deg, #0d1b4b 0%, #1a237e 45%, #1565c0 100%);
-    min-height: 100vh; display: flex; align-items: center;
-    position: relative; overflow: hidden;
-    padding: clamp(60px,10vw,100px) 0;
-">
-    <div aria-hidden="true" style="position:absolute;top:-80px;right:-80px;width:clamp(220px,30vw,480px);height:clamp(220px,30vw,480px);border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;"></div>
-    <div aria-hidden="true" style="position:absolute;bottom:-60px;left:-60px;width:clamp(160px,22vw,340px);height:clamp(160px,22vw,340px);border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none;"></div>
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <h1 data-aos="fade-up">
+                        UPT Balai Latihan Pengembangan Produktivitas Tenaga Kerja Surabaya
+                    </h1>
+                    <h2 data-aos="fade-up" data-aos-delay="400">
+                        <i>Meningkatkan produktivitas dan kompetensi tenaga kerja menuju Indonesia yang lebih maju</i>
+                    </h2>
+                    <div data-aos="fade-up" data-aos-delay="600">
+                        <div class="text-center text-lg-start">
+                            <a href="#about"
+                                class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                <span>Selengkapnya</span>
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                    <img src="{{ asset('asset/img/upt.png') }}" class="img-fluid" alt="UPT BLP2TK Surabaya" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Hero -->
 
     <div class="container" style="position:relative;z-index:2;">
         <div class="row align-items-center gy-5">
